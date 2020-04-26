@@ -8,7 +8,8 @@ ENV GIT_EMAIL="mats.pfeiffer@googlemail.com"
 RUN echo 'Server = https://mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 # dependencies
-RUN pacman -Suy --needed --noconfirm base-devel sudo libffi unzip git vim zsh powerline powerline-fonts docker docker-compose
+RUN pacman -Sy --needed --noconfirm sudo unzip git vim zsh zsh-completions powerline powerline-fonts 
+# docker docker-compose libffi
 
 # user setup
 RUN groupadd $USER \
@@ -17,13 +18,16 @@ RUN echo "%$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $USER
 WORKDIR /home/$USER
-RUN mkdir -p git
 
 # yay
-RUN cd ~/git \
-	&& git clone https://aur.archlinux.org/yay.git \
+RUN git clone https://aur.archlinux.org/yay.git \
 	&& cd yay \
-	&& makepkg -si --noconfirm
+	&& sudo pacman -Sy --needed --noconfirm base-devel libffi \
+	&& makepkg -si --noconfirm ~/yay \
+	&& cd .. \
+	&& yay -Rnu --noconfirm go base-devel libffi \
+	&& yes "y" | yay -Scc \
+       	&& rm -rf yay	
 
 # dotfiles
 RUN cd ~ \
@@ -38,9 +42,5 @@ RUN git config --global user.name $GIT_USER \
 
 # vim
 RUN vim +PlugInstall +qall &> /dev/null
-
-# cleanup
-RUN yay -Rsn --noconfirm base-devel \
-	&& yes "y" | yay -Scc
 
 ENTRYPOINT ["zsh"]
