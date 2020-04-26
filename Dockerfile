@@ -8,8 +8,7 @@ ENV GIT_EMAIL="mats.pfeiffer@googlemail.com"
 RUN echo 'Server = https://mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 # dependencies
-RUN pacman -Sy --needed --noconfirm sudo unzip git vim zsh zsh-completions powerline powerline-fonts 
-# docker docker-compose libffi
+RUN pacman -Sy --needed --noconfirm sudo git vim zsh zsh-completions powerline powerline-fonts 
 
 # user setup
 RUN groupadd $USER \
