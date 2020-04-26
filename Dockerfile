@@ -8,7 +8,7 @@ ENV GIT_EMAIL="mats.pfeiffer@googlemail.com"
 RUN echo 'Server = https://mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 
 # dependencies
-RUN pacman -Suy --needed --noconfirm --quiet base-devel sudo libffi unzip git vim zsh powerline powerline-fonts docker docker-compose
+RUN pacman -Suy --needed --noconfirm base-devel sudo libffi unzip git vim zsh powerline powerline-fonts docker docker-compose
 
 # user setup
 RUN groupadd $USER \
@@ -40,7 +40,7 @@ RUN git config --global user.name $GIT_USER \
 RUN vim +PlugInstall +qall &> /dev/null
 
 # cleanup
-RUN yay -Rsn --noconfirm --quiet base-devel \
-	&& yay -Scc --noconfirm --quiet
+RUN yay -Rsn --noconfirm base-devel \
+	&& yes "y" | yay -Scc
 
 ENTRYPOINT ["zsh"]
