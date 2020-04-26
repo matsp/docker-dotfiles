@@ -10,6 +10,9 @@ RUN echo 'Server = https://mirror.pkgbuild.com/$repo/os/$arch' > /etc/pacman.d/m
 # dependencies
 RUN pacman -Sy --needed --noconfirm sudo git vim zsh zsh-completions powerline powerline-fonts 
 
+# arch setup
+RUN sed -i "s/PKGEXT='.pkg.tar.xz'/PKGEXT='.pkg.tar'/g" /etc/makepkg.conf
+
 # user setup
 RUN groupadd $USER \
   && useradd -m -g $USER -s /usr/bin/zsh $USER
