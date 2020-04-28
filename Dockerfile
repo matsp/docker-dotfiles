@@ -15,8 +15,9 @@ RUN sed -i "s/PKGEXT='.pkg.tar.xz'/PKGEXT='.pkg.tar'/g" /etc/makepkg.conf
 
 # user setup
 RUN groupadd $USER \
-  && useradd -m -g $USER -s /usr/bin/zsh $USER
-RUN echo "%$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+	&& useradd -m -g $USER -s /usr/bin/zsh $USER \
+ 	&& echo "$USER:$USER" | chpasswd \
+	&& echo "%$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER $USER
 WORKDIR /home/$USER
