@@ -1,7 +1,6 @@
 FROM archlinux:latest
 
-ENV TERM xterm-256color
-ENV USER mats
+ENV USER="mats"
 ENV GIT_USER="Mats\ Pfeiffer"
 ENV GIT_EMAIL="mats.pfeiffer@googlemail.com"
 
