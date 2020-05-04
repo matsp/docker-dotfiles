@@ -1,4 +1,3 @@
-#FROM archlinux:latest
 FROM alpine:latest
 
 ENV USER="mats"
