@@ -21,7 +21,7 @@ RUN git init \
   && git pull origin master \
   && source ~/.zshrc &> /dev/null \
   && git config --global user.name $GIT_USER \
-  && git config --global user.email $GIT_EMAIL \
-  && vim +PlugInstall +qall &> /dev/null
+  && git config --global user.email $GIT_EMAIL
+RUN vim +PlugInstall +qall &> /dev/null
 
 ENTRYPOINT ["zsh"]
