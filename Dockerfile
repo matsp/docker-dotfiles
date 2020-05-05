@@ -25,4 +25,4 @@ RUN git init \
   && git config --global user.email $GIT_EMAIL
 RUN vim +PlugInstall +qall &> /dev/null
 
-ENTRYPOINT ["zsh"]
+CMD ["zsh"]
