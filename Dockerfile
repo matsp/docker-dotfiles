@@ -4,13 +4,18 @@ ARG USER
 ARG DOTFILES_GIT_URL
 ARG GIT_USER
 ARG GIT_EMAIL
+ARG USER_ID
+ARG GROUP_ID
+ARG DOCKER_GROUP_ID
 
 # dependencies
 RUN apk add --no-cache git vim zsh zsh-vcs curl docker-cli
 
 # user setup
-RUN addgroup $USER \
-  && adduser -D -s /usr/bin/zsh -G $USER $USER \
+RUN addgroup -g $GROUP_ID $USER \
+  && addgroup -g $DOCKER_GROUP_ID docker \
+  && adduser -D -s /usr/bin/zsh --uid $USER_ID -G $USER $USER \
+  && addgroup $USER docker \
   && echo "$USER:$USER" | chpasswd
 
 USER $USER
