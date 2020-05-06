@@ -6,7 +6,7 @@ ARG GIT_USER
 ARG GIT_EMAIL
 
 # dependencies
-RUN apk add --no-cache git vim zsh zsh-vcs curl docker
+RUN apk add --no-cache git vim zsh zsh-vcs curl docker-cli
 
 # user setup
 RUN addgroup $USER \
