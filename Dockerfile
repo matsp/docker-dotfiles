@@ -26,8 +26,8 @@ RUN git init \
   && git remote add origin $DOTFILES_GIT_URL \
   && git pull origin master \
   && source ~/.zshrc &> /dev/null \
-  && git config --global user.name $GIT_USER \
-  && git config --global user.email $GIT_EMAIL
+  && git config --global user.name "$GIT_USER" \
+  && git config --global user.email "$GIT_EMAIL"
 RUN vim +PlugInstall +qall &> /dev/null
 
 ENTRYPOINT ["zsh"]
