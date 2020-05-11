@@ -25,9 +25,9 @@ WORKDIR /home/$USER
 RUN git init \
   && git remote add origin $DOTFILES_GIT_URL \
   && git pull origin master \
-  && source ~/.zshrc &> /dev/null \
-  && git config --global user.name "$GIT_USER" \
-  && git config --global user.email "$GIT_EMAIL"
-RUN vim +PlugInstall +qall &> /dev/null
+  && source ~/.zshrc &> /dev/null
+RUN git config --global user.name "$GIT_USER" \
+  && git config --global user.email "$GIT_EMAIL" \
+  && vim +PlugInstall +qall &> /dev/null
 
 ENTRYPOINT ["zsh"]
