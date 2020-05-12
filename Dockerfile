@@ -9,7 +9,7 @@ ARG GROUP_ID
 ARG DOCKER_GROUP_ID
 
 # dependencies
-RUN apk add --no-cache git vim zsh zsh-vcs curl docker-cli
+RUN apk add --no-cache git vim zsh zsh-vcs curl
 
 # user setup
 RUN addgroup -g $GROUP_ID $USER \
